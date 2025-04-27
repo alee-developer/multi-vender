@@ -1,8 +1,10 @@
 const ApiResponse = require('../../utils/api_response');
 const jwt = require('jsonwebtoken');
 
-exports.veriftyToken = (req,res,next)=>{
-    const token = req.headers.authorization?.split(" ")[1];
+function veriftyToken(req,res,next){
+    const token = req.headers['authorization'];
+    console.error(req.headers.authorization);
+    console.error('token',token)
     if(!token) return ApiResponse.unauthorized(res);
     try{
         const decoded = jwt.verify(token,process.env.JWT_TOKEN);
@@ -13,6 +15,7 @@ exports.veriftyToken = (req,res,next)=>{
         return ApiResponse.error(res,error.message);
     }
 }
+
 
 generateToken = (id) =>{
    return jwt.sign({
@@ -34,4 +37,4 @@ exports.checkPermission = (permission)=>(req,res,next)=>{
     next();
 }
 
-module.exports = generateToken;
+module.exports = generateToken, veriftyToken;
