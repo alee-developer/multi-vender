@@ -10,6 +10,7 @@ const adminRoute = require('../routes/admin/admin_route');
 const categoryRoute = require('../routes/category/category_route');
 const subcategoryRoute = require('../routes/subcategory/subcategory_route');
 const brandRoute = require('../routes/brand/brand_route');
+const variantRoute = require('../routes/variant/variant_routes');
 
 // middlewares
 app.use(express.json())
@@ -17,6 +18,7 @@ app.use('/api/admin',adminRoute)
 app.use('/api/category',categoryRoute)
 app.use('/api/subcategory',subcategoryRoute)
 app.use('/api/brand',brandRoute)
+app.use('/api/variant',variantRoute)
 
 app.get('/',(req,res)=>{
     res.send("db connectd")
